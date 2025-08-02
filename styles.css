@@ -10,10 +10,25 @@ button {
     background-color: rgb(255, 208, 0);
 }
 
-.numpad {
+.calculator {
+    display: flex;
+    flex-direction: column;
     background-color: silver;
+    align-items: center;
+}
+
+.display {
+    font-size: large;
+    background-color: white;
+    padding: 0.5rem;
+    margin: 1rem;
+}
+
+.numpad {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    padding: 1rem;
 }
 
 .numbers {
