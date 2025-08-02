@@ -1,3 +1,9 @@
+let firstVar = 0;
+let secondVar = null;
+let operand = null;
+
+let calculation = document.querySelector("#calculation");
+let result = document.querySelector("#result");
 
 let operator = document.querySelectorAll(".op-button");
 let number = document.querySelectorAll(".num-button");
@@ -5,30 +11,43 @@ let clear = document.querySelector("#clear");
 let remove = document.querySelector("#remove");
 
 
-function eventListener() {
-    button.forEach(element => {
-        element.addEventListener("click", () => {
-            if (var1 === null) var1 = element.textContent;
-            else if (varOperator === null) varOperator = element.textContent;
-            else if (var2 === null) var2 = element.textContent;
+operatorEventListener();
+clearEventListener();
 
-            if (var1 != null && varOperator != null && var2 != null) {
-                console.log(operate(var1, var2, varOperator));
-                var1 = null;
-                var2 = null;
-                varOperator = null;
+function operatorEventListener() {
+    operator.forEach(element => {
+        element.addEventListener("click", (e) => {
+            if (firstVar != null) {
+                operand = element.textContent;
+                calculation.textContent = `${firstVar} ${operand}`;
             }
+        });
+    });
+}
+
+function numberEventListener() {
+    number.forEach(element => {
+        element.addEventListener("click", (e) => {
+
         })
     })
-}
-
-function operatorEventlistener() {
 
 }
 
-function numberEventlistener() {
+function clearEventListener() {
+    clear.addEventListener("click", (e) => {
+        firstVar = null;
+        secondVar = null;
+        operand = null;
+        calculation.textContent = "";
+        result.textContent = "";
+    });
+}
+
+function removeEventListener() {
 
 }
+
 
 function add(a, b) {
     return a + b;
