@@ -25,12 +25,23 @@ function operatorEventListener() {
             if (secondNumber != "") {
                 result = operate(firstNumber, secondNumber, operand);
                 clearMinusResult();
-                firstNumber = result;
+                if (result === 0) {
+                    firstNumber = "0";
+                }
+                else {
+                    firstNumber = result;
+                }
+                result = "";
+                operand = element.textContent;
+            }
+            else if (result === 0) {
+                firstNumber = "0";
                 result = "";
                 operand = element.textContent;
             }
             else if (result != "") {
                 firstNumber = result;
+                result = "";
                 operand = element.textContent;
             }
             else if (firstNumber != "") {
@@ -43,9 +54,11 @@ function operatorEventListener() {
 
 function equalsEventListener() {
     equals.addEventListener("click", (e) => {
-        result = operate(firstNumber, secondNumber, operand);
-        clearMinusResult();
-        displayNumbers();
+        if (firstNumber != "" && secondNumber != "" && operand != "") {
+            result = operate(firstNumber, secondNumber, operand);
+            clearMinusResult();
+            displayNumbers();
+        }
     });
 }
 
@@ -81,19 +94,13 @@ function clearEventListener() {
     });
 }
 
-function clearMinusResult() {
-    display.textContent = "";
-    firstNumber = "";
-    secondNumber = "";
-    operand = "";
-}
-
 function removeEventListener() {
-
+    
+    
 }
 
 function displayNumbers() {
-    if (result != "") {
+    if (result != "" || result === 0) {
         display.textContent = `${result}`;
     }
     else {
@@ -101,9 +108,15 @@ function displayNumbers() {
     }
 }
 
+function clearMinusResult() {
+    display.textContent = "";
+    firstNumber = "";
+    secondNumber = "";
+    operand = "";
+}
 
 function add(a, b) {
-    return parseInt(a) + parseInt(b);
+    return +a + +b;
 }
 
 function subtract(a, b) {
