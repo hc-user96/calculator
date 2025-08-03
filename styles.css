@@ -10,6 +10,10 @@ button {
     background-color: rgb(255, 208, 0);
 }
 
+#equals {
+    background-color: rgb(255, 208, 0);
+}
+
 .calculator {
     display: flex;
     flex-direction: column;
@@ -23,7 +27,7 @@ button {
     padding: 0.5rem;
     margin: 1rem;
     width: 20rem;
-    height: 5rem;
+    height: 3rem;
     text-align: end;
 }
 

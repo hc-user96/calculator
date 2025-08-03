@@ -1,47 +1,87 @@
-let firstVar = 0;
-let secondVar = null;
-let operand = null;
+let firstNumber = "0";
+let secondNumber = "";
+let operand = "";
+let result = "";
 
-let calculation = document.querySelector("#calculation");
-let result = document.querySelector("#result");
+let display = document.querySelector("#result");
 
 let operator = document.querySelectorAll(".op-button");
+let equals = document.querySelector("#equals");
 let number = document.querySelectorAll(".num-button");
 let clear = document.querySelector("#clear");
 let remove = document.querySelector("#remove");
 
 
 operatorEventListener();
+equalsEventListener();
+numberEventListener();
 clearEventListener();
+removeEventListener();
+
 
 function operatorEventListener() {
     operator.forEach(element => {
         element.addEventListener("click", (e) => {
-            if (firstVar != null) {
+            if (secondNumber != "") {
+                result = operate(firstNumber, secondNumber, operand);
+                clearMinusResult();
+                firstNumber = result;
                 operand = element.textContent;
-                calculation.textContent = `${firstVar} ${operand}`;
+            }
+            else if (result != "") {
+                firstNumber = result;
+                operand = element.textContent;
+            }
+            else if (firstNumber != "") {
+                operand = element.textContent;
             }
         });
+    });
+}
+
+function equalsEventListener() {
+    equals.addEventListener("click", (e) => {
+        result = operate(firstNumber, secondNumber, operand);
+        clearMinusResult();
     });
 }
 
 function numberEventListener() {
     number.forEach(element => {
         element.addEventListener("click", (e) => {
-
-        })
-    })
-
+            if (operand === "") {
+                if (firstNumber === "0") {
+                    firstNumber = element.textContent;
+                }
+                else {
+                    firstNumber = `${firstNumber}${element.textContent}`;
+                }
+                result = "";
+            }
+            else {
+                if (secondNumber === "0") {
+                    secondNumber = element.textContent;
+                }
+                else {
+                    secondNumber = `${secondNumber}${element.textContent}`;
+                }
+            }
+        });
+    });
 }
 
 function clearEventListener() {
     clear.addEventListener("click", (e) => {
-        firstVar = null;
-        secondVar = null;
-        operand = null;
-        calculation.textContent = "";
-        result.textContent = "";
+        clearMinusResult();
+        result = "";
     });
+}
+
+function clearMinusResult() {
+    display.textContent = "";
+    firstNumber = "";
+    secondNumber = "";
+    operand = "";
 }
 
 function removeEventListener() {
