@@ -9,14 +9,12 @@ let operator = document.querySelectorAll(".op-button");
 let equals = document.querySelector("#equals");
 let number = document.querySelectorAll(".num-button");
 let clear = document.querySelector("#clear");
-let remove = document.querySelector("#remove");
 
 
 operatorEventListener();
 equalsEventListener();
 numberEventListener();
 clearEventListener();
-removeEventListener();
 
 
 function operatorEventListener() {
@@ -25,7 +23,13 @@ function operatorEventListener() {
             if (secondNumber != "") {
                 result = operate(firstNumber, secondNumber, operand);
                 clearMinusResult();
-                if (result === 0) {
+                if (!(isFinite(result))) {
+                    clearMinusResult();
+                    result = "";
+                    display.textContent = "NOOOO";
+                    return;
+                }
+                else if (result === 0) {
                     firstNumber = "0";
                 }
                 else {
@@ -94,17 +98,20 @@ function clearEventListener() {
     });
 }
 
-function removeEventListener() {
-    
-    
-}
-
 function displayNumbers() {
-    if (result != "" || result === 0) {
-        display.textContent = `${result}`;
+    if (isFinite(result)) {
+        if (result != "" || result === 0) {
+            display.textContent = `${result}`;
+        }
+        else {
+            display.textContent = `${firstNumber}${operand}${secondNumber}`;
+        }
     }
     else {
-        display.textContent = `${firstNumber}${operand}${secondNumber}`;
+        display.textContent = "NOOOO";
+        firstNumber = "";
+        secondNumber = "";
+        result = "";
     }
 }
 
