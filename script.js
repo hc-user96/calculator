@@ -26,6 +26,7 @@ function operatorEventListener() {
                 result = operate(firstNumber, secondNumber, operand);
                 clearMinusResult();
                 firstNumber = result;
+                result = "";
                 operand = element.textContent;
             }
             else if (result != "") {
@@ -35,6 +36,7 @@ function operatorEventListener() {
             else if (firstNumber != "") {
                 operand = element.textContent;
             }
+            displayNumbers();
         });
     });
 }
@@ -43,6 +45,7 @@ function equalsEventListener() {
     equals.addEventListener("click", (e) => {
         result = operate(firstNumber, secondNumber, operand);
         clearMinusResult();
+        displayNumbers();
     });
 }
 
@@ -66,6 +69,7 @@ function numberEventListener() {
                     secondNumber = `${secondNumber}${element.textContent}`;
                 }
             }
+            displayNumbers();
         });
     });
 }
@@ -88,9 +92,18 @@ function removeEventListener() {
 
 }
 
+function displayNumbers() {
+    if (result != "") {
+        display.textContent = `${result}`;
+    }
+    else {
+        display.textContent = `${firstNumber}${operand}${secondNumber}`;
+    }
+}
+
 
 function add(a, b) {
-    return a + b;
+    return parseInt(a) + parseInt(b);
 }
 
 function subtract(a, b) {
